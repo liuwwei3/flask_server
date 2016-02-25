@@ -1,0 +1,21 @@
+<html><head>
+  <style>
+   
+    textarea{
+    width:100%;
+    height:90%;
+	margin:auto;
+    }
+	button{
+	width : 100%;
+	height : 9%;
+	margin-top: 1%;
+	}
+    </style>
+</head>
+<body>
+<form action='/refresh' target='pdf' method="post">
+<textarea type="textarea" name='data'></textarea>
+<button type='submit'>{{ current_user.id }}提交</button>
+</form>
+</body></html>
