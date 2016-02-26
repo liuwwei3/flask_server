@@ -1,7 +1,7 @@
 # coding:utf-8
 
 from flask import g, flash, session, Flask, redirect, url_for, render_template, request
-from flask.ext.login import login_user, LoginManager, current_user
+from flask.ext.login import logout_user, login_user, LoginManager, current_user
 from flask.ext.openid import OpenID
 
 app = Flask(__name__)
@@ -14,10 +14,32 @@ import User
 import os
 import latex
 from Forms import LoginForm
+import markdown
 
 @app.route('/')
+@app.route('/index')
 def hello():
-	return "<h1>Hello!</h1>"
+	args = {}
+	args['location'] = 'home'
+	return render_template('index.html', args=args)
+
+@app.route('/generate_md', methods=['GET', 'POST'])
+def generate_md():
+	if request.method=='GET':
+		return "<center><h1>HELLO</h1></md>"
+	else:
+		script = '''<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>'''
+		return script + "<body>" + markdown.markdown(request.form['data']) + "</body>"
+
+@app.route('/md_input')
+def md_input():
+	return render_template('md_pages/md_input.html')
+
+@app.route('/blogs')
+def blogs():
+	args = {}
+	args['location'] = 'blogs'
+	return render_template('blogs.html', args=args)
 
 @app.route('/input')
 def input_page():
@@ -27,15 +49,6 @@ def input_page():
 @app.route('/movie')
 def movie():
 	return render_template('movie.html')
-
-@app.route("/refresh2", methods=['post'])
-def refresh2():
-	data = request.form['data']
-	fs = open('_temp', 'w')
-	fs.write(data)
-	fs.close()
-	os.system('latexmk -pdf _temp; cp _temp.pdf static/')
-	return redirect("/static/_temp.pdf")
 
 @app.route("/refresh", methods=['post'])
 def refresh():
@@ -50,6 +63,21 @@ def refresh():
 def latex_online():
 	return render_template('latex.html')
 
+@app.route('/md')
+def md_main():
+	return render_template('md_pages/md.html')
+
+@app.route('/logout')
+def logout():
+	logout_user()
+	return redirect('/index')
+
+@app.route('/myinfo')
+def myinfo():
+	if current_user.id:
+		return render_template('myinfo.html', args = {"location": "myinfo"})
+	else:
+		return "not login yet"
 
 @app.route('/login', methods=['GET', 'POST'])
 @oid.loginhandler
@@ -62,11 +90,7 @@ def login():
 		user = User.User()
 		user.id = request.form['email']
 		login_user(user)
-		return "GOOD LOGIN : " + user.id
-
-@app.route('/check')
-def check():
-	return 
+		return redirect("/index")
 
 @lm.user_loader
 def load_user(id):
