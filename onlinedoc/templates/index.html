@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+  <body style="padding-top:50px">
+    {% include 'header.html' %}
+
+	{% if current_user.id %}
+		{% include 'user_body.html' %}
+	{% else %}
+		<div class="jumbotron">
+			<h1> Welcome to ONLINE LATEX!!</h1>
+			<p> 您还没有登录，登录体验更好的服务! </p>
+			<button class="btn btn-success btn-lg" data-toggle="modal" data-target="#logindiag">登录</button>
+			<button class="btn btn-normal btn-lg" data-toggle="modal" data-target="#regdiag">注册</button>
+			<a href='/see_blogs'> 不想登录，看看别人的作品</a>   
+		</div>
+	{% endif %}
+    
+    {% include 'footer.html' %}
+{% endblock %}
