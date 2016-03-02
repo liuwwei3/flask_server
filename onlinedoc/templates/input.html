@@ -15,7 +15,8 @@
 </head>
 <body>
 <form action='/refresh' target='f_pdf' method="post">
-<textarea type="textarea" name='data'></textarea>
-<button class="btn btn-success" type='submit'>{{ current_user.id }}提交</button>
+<textarea type="textarea" name='data'>{{ data }}</textarea>
+<input type='hidden' name="project" value= '{{ project }}' ></input>
+<button class="btn btn-success" type='submit'>提交({{ project }})</button>
 </form>
 </body></html>

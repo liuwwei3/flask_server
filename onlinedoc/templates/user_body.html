@@ -23,7 +23,18 @@
            <ul class='list-group' id="main">
               {% for ele in blogs %}
                  <li class='list-group-item container-fluid'>
-                    {{ ele }}
+                    <div class="row">
+						<div class="col-xs-5">
+							{{ ele.project }}
+						</div>
+						<div class="col-xs-4">
+							{{ ele.update_time }}
+						</div>
+						<div class="col-xs-3">
+							<a class='btn btn-normal' href = "/latex?project={{ ele.project }}">编辑</a>
+							<a class='btn btn-error' href = "/delproject?project={{ ele.project }}">删除</a>
+						</div>
+					</div>
                  </li>
               {% endfor %}
            </ul>
