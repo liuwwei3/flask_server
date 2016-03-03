@@ -56,7 +56,7 @@ def latex_online():
 	project = request.args.get('project')
 	if not project:
 		return "<h1>Invalid Project Name<h1>"
-	print "PROJECT: ",project
+	#print "PROJECT: ",project
 	return render_template('latex.html', project = project)
 
 
