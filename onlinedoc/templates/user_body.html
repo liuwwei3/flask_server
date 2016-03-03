@@ -6,15 +6,17 @@
               <form class="form">
                  <div class="input-group">
                     <input type='text' class="form-control" name="rootquery" placeholder="query">
-                    <div class="input-group-addon">
-                       <button type="submit" class="glyphicon glyphicon-search"></button>
-                    </div>
-                 </div>
+                    <div class="input-group-btn">
+                            <button class="btn btn-info" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                    </div> 
+				</div>
               </form>
            </div>
 		   <div class="col-xs-2">
-                       <a href="/latex" class="btn btn-success">新建</a>
-		    </div>
+                <div class="pull-right">
+                       <button class="btn btn-success" data-toggle="modal" data-target="#proname">新建文档</button>
+		   		</div>			
+		   </div>
 		</div>
 
 		<div style="padding-top:20px" ></div>
@@ -41,3 +43,24 @@
         </div>
      </div>
   </div>
+
+
+<div class="modal bs-examble-modal-sm fade" id="proname">
+   <div class="modal-dialog">
+     <div class="modal-content">
+	   <div class="modal-header">
+	      <h4 class="modal-title">
+		    请输入项目名字</h4>
+	   </div>
+	   <div class="modal-body">
+		    <form action="/latex" class="form" method="get">
+			<input class="form-control" type="text" name="project" />
+			<div style="padding-top:15px">
+				<button class="btn btn-success" type="submit">确定</button>
+			</div>
+			</form>
+	   </div>
+	 </div>
+  </div>
+</div>
+			  

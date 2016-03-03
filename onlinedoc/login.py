@@ -24,6 +24,7 @@ def login():
 	else:#form.validate_on_submit():
 		user = User.User()
 		user.id = request.form['email']
+		print "PASSWD:", request.form['passwd']
 		login_user(user)
 		return redirect("/index")
 

@@ -16,14 +16,14 @@
       <div class="navbar-collapse collapse"  id="good-bye">
      <ul class="navbar-nav nav">
         {% if args and args['location'] == "home"  %}
-        <li class="active"><a href="/">HOME</a></li>
-        <li><a href="/blogs">BLOGS</a></li>
+        <li class="active"><a href="/">我的主页</a></li>
+        <li><a href="/blogs">模板</a></li>
         {%  elif args and args['location'] == "blogs" %}
-        <li><a href="/">HOME</a></li>
-        <li class="active"><a href="/blogs">BLOGS</a></li>
+        <li><a href="/">我的主页</a></li>
+        <li class="active"><a href="/blogs">模板</a></li>
         {% else %}
-		<li><a href="/">HOME</a></li>
-		<li><a href="/blogs">BLOGS</a></li>
+		<li><a href="/">我的主页</a></li>
+		<li><a href="/blogs">模板</a></li>
 		{% endif %}
       </ul>
       <ul class="nav navbar-nav navbar-right">
