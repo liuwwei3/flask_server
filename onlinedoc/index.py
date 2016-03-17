@@ -6,6 +6,7 @@ import os
 from onlinedoc import app, db
 import pymongo
 import time
+import re
 
 @app.route('/')
 @app.route('/index')
@@ -14,7 +15,11 @@ def index():
 	args['location'] = 'home'
 	blog_list = []
 	if current_user.id:
-		blog_list = [x for x in db.blogs.find({"user" : str(current_user.id) })]
+		if "query" in request.args:
+			blog_list = [x for x in db.blogs.find({"user" : str(current_user.id), \
+			"project": re.compile('.*'+request.args['query'] +'.*') })]
+		else:
+			blog_list = [x for x in db.blogs.find({"user" : str(current_user.id) })]
 		for ele in blog_list:
 			ele['update_time'] = time.strftime("%Y-%m-%d",  time.localtime(ele['update_time']))
 	return render_template('index.html', args=args, blogs = blog_list)

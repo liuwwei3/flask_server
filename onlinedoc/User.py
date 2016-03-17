@@ -1,13 +1,29 @@
 # user and login manager
-from flask import g
-from flask.ext.login import LoginManager, current_user
-from flask.ext.openid import OpenID
-from Server import lm, app, oid
-
+from onlinedoc import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class User():
 	id = ''
- 
+
+	def verify(self, passwd):
+		'''
+		return 
+			1: sucess
+			0: error password
+			-1: no such user
+		'''
+		data = db.users.find_one({"_id": self.id})
+		if data:
+			if check_password_hash(data['passwd'], passwd):
+				return 1
+			else:
+				return 0
+		return -1
+	
+	def save(self, passwd):
+		hashpw = generate_password_hash(passwd)
+		db.users.save({"_id": self.id, "passwd": hashpw})
+
 	def is_authenticated(self):
 		return True
  

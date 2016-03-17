@@ -3,5 +3,5 @@ from wtforms import TextField, BooleanField
 from wtforms.validators import Required
 
 class LoginForm(Form):
+	pass
 
-	remeber_me = BooleanField('RemeberMe', default = False)

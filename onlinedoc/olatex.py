@@ -1,7 +1,7 @@
 # coding:utf-8
 
 from flask import g, flash, session, Flask, redirect, url_for, render_template, request
-from flask.ext.login import logout_user, login_user, LoginManager, current_user
+from flask.ext.login import login_required, logout_user, login_user, LoginManager, current_user
 from onlinedoc import app, db
 import os
 import latex
@@ -10,6 +10,7 @@ import urllib
 dir = os.path.abspath(os.path.dirname(__file__))
 
 @app.route('/input')
+@login_required
 def input_page():
 	project = request.args.get('project')
 	print "current_user: ", current_user
@@ -52,6 +53,7 @@ def gen_pdf():
 	
 
 @app.route('/latex')
+@login_required
 def latex_online():
 	project = request.args.get('project')
 	if not project:

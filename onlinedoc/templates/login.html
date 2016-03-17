@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-{{ form.hidden_tag() }}
-<form method='POST' name='login'>
+<form method='POST' action='/login'>
+	{{ form.hidden_tag() }}
     <input type='text' name="email" placehoder='email'></input>
 	<br>
-	<input type="password" name='pw' placeholder='password'></input>
-	<p>{{form.remeber_me}} Remember Me</p>
+	<input type="password" name='passwd' placeholder='password'></input>
     <p><input type="submit" value="Sign In"></p>
 </form>
 
