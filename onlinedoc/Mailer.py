@@ -20,5 +20,6 @@ def send_mail(to, content):
 
 
 if __name__=="__main__":
-	send_mail("810721065@qq.com", "hello，欢迎加入我们! 为了保证您正常使用我们的功能，请激活账号。验证码：123456")
-
+	res = send_mail("810721065@qq.com", "hello，欢迎加入我们! 为了保证您正常使用我们的功能，请激活账号。验证码：123456")
+	if json.loads(res)['message'] == "error":
+		print "fail"

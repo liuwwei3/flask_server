@@ -8,6 +8,7 @@ import os
 from Mailer import send_mail
 import random
 import time
+import json
 
 lm = LoginManager()
 lm.init_app(app)
@@ -67,9 +68,11 @@ def yanzhengma():
 	print request.values['email']
 	email = request.values['email']
 	num = str(int(random.random() * 10000))
-	send_mail("810721065@qq.com", num)
+	res = send_mail(email, num)
+	if json.loads(res)['message'] == 'error':
+		return "发送失败"
 	db.reg.save({"_id": email, "time": time.time(), "num" : num})
-	return "Success"
+	return "发送成功"
 
 
 @lm.user_loader
